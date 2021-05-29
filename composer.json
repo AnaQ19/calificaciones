@@ -1,0 +1,20 @@
+{
+    "name": "anaq19/calificaciones",
+    "description": "Registro de notas",
+    "type": "project",
+    "require": {
+        "twig/twig": "^3.3",
+        "vlucas/phpdotenv": "^5.3"
+    },
+    "authors": [
+        {
+            "name": "Ana",
+            "email": "est.aquinonezm@uml.edu.ni"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Ana\\": "src/php"
+        }
+    }
+}

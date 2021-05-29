@@ -1,0 +1,14 @@
+{
+  "name": "registro-notas",
+  "version": "1.0.0",
+  "description": "Registro de notas",
+  "main": "index.js",
+  "repository": "git@github.com:AnaQ19/calificaciones.git",
+  "author": "Ana <est.aquinonezm@uml.edu.ni>",
+  "license": "Apache-2",
+  "dependencies": {
+    "bootstrap": "4.6.0",
+    "jquery": "^3.6.0",
+    "yarn": "^1.22.10"
+  }
+}
