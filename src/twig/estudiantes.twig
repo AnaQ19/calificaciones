@@ -1,0 +1,92 @@
+{% extends "base.twig" %}
+
+{% macro alerta(texto, tipo = "alert-danger") %}
+	<div class="alert {{ tipo }}" role="alert">
+		{{ texto }}
+	</div>
+{% endmacro %}
+
+{% block contenido %}
+	<div class="container">
+		<h1>Lista de Estudiantes</h1>
+		{% if borrado %}
+			{{ _self.alerta('Se borro correctamente el nombre del estudiante') }}
+		{% endif %}
+
+		{% if update %}
+			{{ _self.alerta('Se actualizo correctamente el nombre del estudiante','alert-info') }}
+		{% endif %}
+
+		{% if nuevaestudiantes %}
+			{{ _self.alerta('Se agrego el nombre del estudiante correctamente', 'alert-info') }}
+		{% endif %}
+
+
+		<div class="container mb-5 text-left">
+			<button type="buttton" class="btn btn-info" id="btnAgregarEstudiante">
+				<i class="fas fa-plus"></i>
+				Agregar nombre del Estudiante
+			</button>
+		</div>
+
+
+		<table class="table" id="tablaestudiantes">
+			<thead>
+				<tr>
+					<th></th>
+					<th scope="col">ID</th>
+					<th scope="col">Carrera</th>
+					<th scope="col">Nombre</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for estudiantes in listaEstudiantes %}
+					<tr>
+						<th>
+							<form method="POST" target="_self">
+								<button type="submit" class="btn btn-danger" name="id_borrado" value={{ estudiantes.id_estudiante }}>
+									<i class="fas fa-trash-alt"></i>
+								</button>
+
+								<button type="button" class="btn btn-warning btnEditar" data-nombreestudiante="{{ estudiantes.nombre }}" data-idcarrera="{{estudiantes.id_carrera}}"  data-idestudiante="{{ estudiantes.id_estudiante }}">
+									<i class="fas fa-edit"></i>
+								</button>
+
+							</form>
+						</th>
+						<th scope="row">{{ estudiantes.id_estudiante }}</th>
+						<td>{{ estudiantes.nombreCarrera}}</td>
+						<td>{{ estudiantes.nombre}}</td>
+					</tr>
+				{% else %}
+					{{ _self.alerta('No se encontro el nombre el estudiante') }}
+				{% endfor %}
+			</tbody>
+		</table>
+		<br>
+
+		<form method="POST" target="_self" style="display: none;" id="formEstudiantes">
+			<div class="form-group">
+				<label for="carrera">Carrera</label>
+				<select class="form-control" name="carrera">
+					{% for carrera in listaCarreras %}
+						<option value="{{ carrera.id }}">{{ carrera.nombre }}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="nombreEstudiante">Nombre del Estudiante</label>
+				<input type="text" autocomplete="off" class="form-control" name="nombreEstudiante" placeholder="Escribe un nombre el estudiante">
+			</div>
+			<button type="submit" class="btn btn-success" name="agregarestudiantes" value="true">
+				<i class="fas fa-save"></i>
+				Guardar nombre del Estudiante
+			</button>
+		</form>
+	</div>
+{% endblock %}
+
+{% block scripts %}
+	{{ parent() }}
+	<script src="./src/js/estudiante.js"></script>
+{% endblock %}

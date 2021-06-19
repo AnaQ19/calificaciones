@@ -5,7 +5,7 @@ namespace Ana\Functions;
 trait strFormat {
 
     /**
-     * Hola %nombre mi nombre es %nombre y tengo %edad (["nombre" => "Jorge"])
+     * Hola %nombre mi nombre es %nombre y tengo %edad (["nombre" => "Ana"])
      * Regresa una cadena de texto con el formato especificado
      * @param string $str Texto que será formateado
      * @param array $vars Arreglo con variables usadas en el formateo

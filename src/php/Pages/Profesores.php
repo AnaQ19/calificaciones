@@ -15,21 +15,39 @@ final class profesores  extends   Page
         parent::__construct("Profesores", "Profesores.twig");
     }
 
-    // En algun momento va necesitar iniciar compontenes
-    // esta funcion se llama despues de construir la clase,
+
     public function setUp()
     {
-        $this->listaProfesores = profesor::getListaProfesor();
     }
 
     // Esta funcion se usa para cargar variables en la plantilla
     public function initVars()
+
     {
+        $this->listaProfesores = profesor::getListaProfesor();
         $this->setVar('listaProfesores', $this->listaProfesores);
     }
 
     public function CheckPost()
     {
-        //
+        $agregarProfesores =($this->getPostInt('agregarProfesores') ?: $this->getPost('agregarProfesores'));
+        $borrar = $this->getPostInt('id_borrado');
+        if ($borrar) {
+            profesor::borrarprofesorById($borrar);
+            $this->setVar('borrado', $borrar);
+        }
+
+        if ($agregarProfesores === 'true') {
+            $nombreProfesor = $this->getPost('nombreProfesores');
+            Profesor::agregarprofesor($nombreProfesor);
+            $this->setVar('nuevaProfesores', true);
+        } else if ($this->getPostInt('agregarProfesores')){
+            // entrar al bloque de edicion
+            $idprofesor = $agregarProfesores;
+            $nombreProfesor = $this->getPost('nombreProfesores');
+            Profesor::updateNombreprofesor($idprofesor,$nombreProfesor);
+            $this->setVar('update', true);
+
+        }
     }
 }

@@ -6,9 +6,9 @@ use Ana\Modulos\Database;
 
 final class asignatura
 {
-    public static function agregarasignatura(string $nombre, string $universidad)
+    public static function agregarasignatura(string $nombre, string $carrera)
     {
-        $sql = "INSERT INTO asignatura (nombre, carrera ) VALUES(:nombre, :carrera,)";
+        $sql = "INSERT INTO `asignatura` (`nombre`, `carrera` ) VALUES(:nombre, :carrera)";
 
         $stmt = Database::prepare_execute($sql, [
             "nombre" => $nombre,
